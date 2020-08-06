@@ -1,2 +1,7 @@
+# dependencies
+
+# folders
 /node_modules
-package-lock.json 
+
+# files
+package-lock.json
