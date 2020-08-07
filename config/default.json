@@ -1,0 +1,4 @@
+{
+	"mongoURI": "mongodb+srv://mohit:12345@merndb.bxegw.gcp.mongodb.net/MernDB?retryWrites=true&w=majority",
+	"jwtSecret": "mysecretkey"
+}
