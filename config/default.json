@@ -1,4 +1,6 @@
 {
 	"mongoURI": "mongodb+srv://mohit:12345@merndb.bxegw.gcp.mongodb.net/MernDB?retryWrites=true&w=majority",
-	"jwtSecret": "mysecretkey"
+	"jwtSecret": "mysecretkey",
+	"githubClientId": "65f7bb53531375d5596c",
+	"githubSecret": "ae338d0343aa3a91108b8dc377fa6bdd341362ea"
 }
