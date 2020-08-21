@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { setAlert } from '../../actions/alert';
+import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
+import { setAlert } from '../../actions/alert';
 import Alert from '../layout/Alert';
+import { register } from '../../actions/auth';
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, register, isAuthenticated }) => {
 	const [ formData, setFormData ] = useState({
 		name: '',
 		email: '',
@@ -25,9 +26,13 @@ const Register = ({ setAlert }) => {
 		if (password !== cpassword) {
 			setAlert('Passwords do not match', 'danger', 3000);
 		} else {
-			console.log('Success');
+			register({ name, email, password });
 		}
 	};
+
+	if (isAuthenticated) {
+		return <Redirect to="dashboard" />;
+	}
 
 	return (
 		<section className="container">
@@ -38,7 +43,7 @@ const Register = ({ setAlert }) => {
 			</p>
 			<form className="form" onSubmit={handleSubmit}>
 				<div className="form-group">
-					<input type="text" placeholder="Name" name="name" required onChange={handleChange} value={name} />
+					<input type="text" placeholder="Name" name="name" onChange={handleChange} value={name} />
 				</div>
 				<div className="form-group">
 					<input
@@ -83,7 +88,13 @@ const Register = ({ setAlert }) => {
 };
 
 Register.propTypes = {
-	setAlert: PropTypes.func.isRequired
+	setAlert: PropTypes.func.isRequired,
+	register: PropTypes.func.isRequired,
+	isAuthenticated: PropTypes.bool
 };
 
-export default connect(null, { setAlert })(Register);
+const mapStateToProps = (state) => ({
+	isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { setAlert, register })(Register);
